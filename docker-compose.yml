@@ -1,0 +1,9 @@
+version: "2.2"
+services: 
+  golang-env:
+    container_name: golang-go-algo
+    image: golang:latest
+    stdin_open: true
+    tty: true
+    volumes: 
+     - .:/go/github.com/Insight7/go_algo
