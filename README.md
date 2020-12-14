@@ -4,3 +4,8 @@
 
 
 This is a list of Algorithms written in goLang
+
+
+Running the test
+
+`go test ./pkg/*`
