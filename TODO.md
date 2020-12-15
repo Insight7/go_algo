@@ -3,7 +3,7 @@ List of algorithms to implement
 
 
 ## Sorting
- - [ ] Bubble Sort ----  O(n<sup>2</sup>)
+ - [X] Bubble Sort ----  O(n<sup>2</sup>)
  - [ ] Bucket Sort
  - [ ] Counting Sort
  - [ ] Heap Sort

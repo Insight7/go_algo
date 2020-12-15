@@ -7,3 +7,4 @@ services:
     tty: true
     volumes: 
      - .:/go/github.com/Insight7/go_algo
+     -./init.sh:/usr/local/sbin/init.sh
