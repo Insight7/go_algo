@@ -4,10 +4,10 @@ List of algorithms to implement
 
 ## Sorting
  - [X] Bubble Sort ----  O(n<sup>2</sup>)
- - [ ] Bucket Sort
- - [ ] Counting Sort
+ - [X] Bucket Sort
+ - [X] Counting Sort
  - [ ] Heap Sort
- - [ ] Insertion Sort
+ - [X] Insertion Sort
  - [ ] Merge Sort
  - [ ] Quick Sort (in-place, Hoare partition)
  - [ ] Quick Sort (Dutch National Flag algorithm)

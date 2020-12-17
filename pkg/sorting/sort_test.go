@@ -30,7 +30,7 @@ func TestBubbleSort(t *testing.T) {
 // Bucket sort test cases
 func TestBucketSort(t *testing.T) {
 	for i := 0; i < RandomSortIterationCount; i++ {
-		randomArray := randomArrayGeneratorWithRange(i, 1000)
+		randomArray := randomArrayGeneratorWithRange(i, 0, 1000)
 		result := copySlice(randomArray)
 		//testArray := copySlice(randomArray)
 
@@ -48,11 +48,11 @@ func TestBucketSort(t *testing.T) {
 // Counting sort test cases
 func TestCountingSort(t *testing.T) {
 	for i := 0; i < RandomSortIterationCount; i++ {
-		randomArray := randomArrayGenerator(i)
+		randomArray := randomArrayGeneratorWithRange(i, 0, 100)
 		result := copySlice(randomArray)
 		//testArray := copySlice(randomArray)
 
-		CountingSort(result)
+		CountingSort(result, 100)
 		sort.Ints(randomArray)
 
 		if !IsArrayEqual(result, randomArray) {
@@ -157,18 +157,17 @@ func TestRadixSort(t *testing.T) {
 
 // Test helper functions
 
-func randomArrayGeneratorWithRange(seed int, valueRange int) []int {
+func randomArrayGeneratorWithRange(seed int, min int, max int) []int {
 	array := make([]int, RandomArraySize)
 	rand.Seed(int64(seed))
 	for i := 0; i < RandomArraySize; i++ {
-		array[i] = int(rand.Uint32())
-		array[i] = rand.Int() % valueRange
+		array[i] = rand.Intn(max-min) + min
 	}
 	return array
 }
 
 func randomArrayGenerator(seed int) []int {
-	return randomArrayGeneratorWithRange(seed, 100000)
+	return randomArrayGeneratorWithRange(seed, 0, 100000)
 }
 
 func copySlice(input []int) []int {
