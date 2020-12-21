@@ -6,16 +6,16 @@ List of algorithms to implement
  - [X] Bubble Sort ----  O(n<sup>2</sup>)
  - [X] Bucket Sort
  - [X] Counting Sort
- - [ ] Heap Sort
+ - [X] Heap Sort
  - [X] Insertion Sort
- - [ ] Merge Sort
- - [ ] Quick Sort (in-place, Hoare partition)
- - [ ] Quick Sort (Dutch National Flag algorithm)
- - [ ] Selection Sort
+ - [X] Merge Sort
+ - [ ] Quick Sort
+ - [X] Selection Sort
  - [ ] Radix Sort
 
 ## Search Algorithms
- - [ ] Binary Search
+ - [X] Linear Search
+ - [X] Binary Search
  - [ ] Interpolation Search
  - [ ] Ternary Search
 

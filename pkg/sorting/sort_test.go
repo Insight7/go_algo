@@ -107,7 +107,7 @@ func TestMergeSort(t *testing.T) {
 		result := copySlice(randomArray)
 		//testArray := copySlice(randomArray)
 
-		MergeSort(result)
+		result = MergeSort(result)
 		sort.Ints(randomArray)
 
 		if !IsArrayEqual(result, randomArray) {
