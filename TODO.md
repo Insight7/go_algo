@@ -35,8 +35,8 @@ List of algorithms to implement
 ### Queue
 
 ### Linked List
- - [ ] singly Linked List
- - [ ] Doubly Linked List
+ - [X] singly Linked List
+ - [X] Doubly Linked List
  - [ ] Circular Linked List
 
 ### Segment Tree

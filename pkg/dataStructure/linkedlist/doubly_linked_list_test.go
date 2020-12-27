@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestSinglyLinkedListLenght(t *testing.T) {
+func TestDoublyLinkedListLenght(t *testing.T) {
 	linkedlist := SinglyLinkedList{
 		Head: &SinglyNode{
 			Data: 1,
@@ -29,8 +29,8 @@ func TestSinglyLinkedListLenght(t *testing.T) {
 	}
 }
 
-func TestSinglyLinkedListInsertAtStart(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListInsertAtStart(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtStart(1)
 	l := linkedlist.Length()
 	if l != 1 {
@@ -44,7 +44,7 @@ func TestSinglyLinkedListInsertAtStart(t *testing.T) {
 	if l != 2 {
 		t.Errorf("Length did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 2 {
+	if linkedlist.Head.Data != 2 || linkedlist.Head.Next.Data != 1 || linkedlist.Head.Next.Prev.Data != 2 {
 		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, linkedlist.Head.Data)
 	}
 	linkedlist.InsertAtStart(3)
@@ -52,13 +52,13 @@ func TestSinglyLinkedListInsertAtStart(t *testing.T) {
 	if l != 3 {
 		t.Errorf("Length did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 3 {
+	if linkedlist.Head.Data != 3 || linkedlist.Head.Next.Data != 2 || linkedlist.Head.Next.Prev.Data != 3 {
 		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, linkedlist.Head.Data)
 	}
 }
 
-func TestSinglyLinkedListInsertAtEnd(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListInsertAtEnd(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtEnd(1)
 	l := linkedlist.Length()
 	if l != 1 {
@@ -72,21 +72,22 @@ func TestSinglyLinkedListInsertAtEnd(t *testing.T) {
 	if l != 2 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Next.Data != 2 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, linkedlist.Head.Next.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 2 || linkedlist.Head.Next.Prev.Data != 1 {
+		t.Errorf("linkedlist did not matched. expected: 1 <==> 2, got: %s ", linkedlist)
 	}
 	linkedlist.InsertAtEnd(3)
 	l = linkedlist.Length()
 	if l != 3 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Next.Next.Data != 3 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, linkedlist.Head.Next.Next.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 2 || linkedlist.Head.Next.Next.Data != 3 ||
+		linkedlist.Head.Next.Prev.Data != 1 || linkedlist.Head.Next.Next.Prev.Data != 2 {
+		t.Errorf("linkedlist did not matched. expected: 1 <==> 2 <==> 3, got: %s ", linkedlist)
 	}
 }
 
-func TestSinglyLinkedListInsertAtIndex(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListInsertAtIndex(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	// testing insert at start
 	linkedlist.InsertAt(0, 1)
 	l := linkedlist.Length()
@@ -103,32 +104,34 @@ func TestSinglyLinkedListInsertAtIndex(t *testing.T) {
 	if l != 2 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Next.Data != 3 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, linkedlist.Head.Next.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 3 || linkedlist.Head.Next.Prev.Data != 1 {
+		t.Errorf("linkedlist did not matched. expected: 1 <==> 3, got: %s ", linkedlist)
 	}
-	// // testing insert in between
+	//testing insert at end
 	linkedlist.InsertAt(1, 2)
 	l = linkedlist.Length()
 	if l != 3 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Next.Data != 2 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, linkedlist.Head.Next.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 3 || linkedlist.Head.Next.Next.Data != 2 ||
+		linkedlist.Head.Next.Prev.Data != 1 || linkedlist.Head.Next.Next.Prev.Data != 3 {
+		t.Errorf("linkedlist did not matched. expected: 1 <==> 3 <==> 2, got: %s ", linkedlist)
 	}
 
 	// testing insert in between
-	linkedlist.InsertAt(2, 4)
+	linkedlist.InsertAt(1, 4)
 	l = linkedlist.Length()
 	if l != 4 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Next.Next.Data != 4 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 4, got: %d ", linkedlist, linkedlist.Head.Next.Next.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 4 || linkedlist.Head.Next.Next.Data != 3 || linkedlist.Head.Next.Next.Next.Data != 2 ||
+		linkedlist.Head.Next.Prev.Data != 1 || linkedlist.Head.Next.Next.Prev.Data != 4 || linkedlist.Head.Next.Next.Next.Prev.Data != 3 {
+		t.Errorf("linkedlist did not matched. expected: 1 <==> 4 <==> 3 <==> 2, got: %s ", linkedlist)
 	}
 }
 
-func TestSinglyLinkedListDeleteAtStart(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListDeleteAtStart(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtEnd(1)
 	linkedlist.InsertAtEnd(2)
 	linkedlist.InsertAtEnd(3)
@@ -145,8 +148,8 @@ func TestSinglyLinkedListDeleteAtStart(t *testing.T) {
 	if l != 2 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 2 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, linkedlist.Head.Data)
+	if linkedlist.Head.Data != 2 || linkedlist.Head.Next.Data != 3 || linkedlist.Head.Prev != nil || linkedlist.Head.Next.Prev.Data != 2 {
+		t.Errorf("linkedlist did not matched. expected: 2 <==> 3, got: %s ", linkedlist)
 	}
 
 	linkedlist.DeleteAtStart()
@@ -154,8 +157,8 @@ func TestSinglyLinkedListDeleteAtStart(t *testing.T) {
 	if l != 1 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 1, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 3 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, linkedlist.Head.Data)
+	if linkedlist.Head.Data != 3 || linkedlist.Head.Prev != nil {
+		t.Errorf("linkedlist did not matched. expected: 3, got: %s ", linkedlist)
 	}
 
 	linkedlist.DeleteAtStart()
@@ -164,12 +167,12 @@ func TestSinglyLinkedListDeleteAtStart(t *testing.T) {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 0, got: %d ", linkedlist, l)
 	}
 	if linkedlist.Head != nil {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: nil, got: %v ", linkedlist, linkedlist.Head)
+		t.Errorf("linkedlist did not matched. expected: nil, got: %s ", linkedlist)
 	}
 }
 
-func TestSinglyLinkedListDeleteAtEnd(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListDeleteAtEnd(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtEnd(1)
 	linkedlist.InsertAtEnd(2)
 	linkedlist.InsertAtEnd(3)
@@ -186,8 +189,8 @@ func TestSinglyLinkedListDeleteAtEnd(t *testing.T) {
 	if l != 2 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 1 && linkedlist.Head.Next.Data != 2 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: [1] --> [2], got: %d ", linkedlist, linkedlist.Head.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 2 || linkedlist.Head.Prev != nil || linkedlist.Head.Next.Prev.Data != 1 {
+		t.Errorf("linkedlist data did not matched.expected: [1] <==> [2], got: %s ", linkedlist)
 	}
 
 	linkedlist.DeleteAtEnd()
@@ -195,8 +198,8 @@ func TestSinglyLinkedListDeleteAtEnd(t *testing.T) {
 	if l != 1 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 1, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 1 {
-		t.Errorf("linkedlist data did not matched. linkedlist: %s\n expected: 1, got: %d ", linkedlist, linkedlist.Head.Data)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Prev != nil {
+		t.Errorf("linkedlist data did not matched.expected: 1, got: %s ", linkedlist)
 	}
 
 	linkedlist.DeleteAtEnd()
@@ -209,8 +212,8 @@ func TestSinglyLinkedListDeleteAtEnd(t *testing.T) {
 	}
 }
 
-func TestSinglyLinkedListDeleteAtIndex(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListDeleteAtIndex(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtEnd(1)
 	linkedlist.InsertAtEnd(2)
 	linkedlist.InsertAtEnd(3)
@@ -228,8 +231,9 @@ func TestSinglyLinkedListDeleteAtIndex(t *testing.T) {
 	if l != 3 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 3, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 1 && linkedlist.Head.Next.Data != 2 && linkedlist.Head.Next.Next.Data != 4 {
-		t.Errorf("linkedlist data did not matched. expected: 1 --> 2 --> 4 , got: %s ", linkedlist)
+	if linkedlist.Head.Data != 1 || linkedlist.Head.Next.Data != 2 || linkedlist.Head.Next.Next.Data != 4 ||
+		linkedlist.Head.Next.Prev.Data != 1 || linkedlist.Head.Next.Next.Prev.Data != 2 {
+		t.Errorf("linkedlist data did not matched. expected: 1 <==> 2 <==> 4 , got: %s ", linkedlist)
 	}
 
 	linkedlist.DeleteAt(2)
@@ -237,8 +241,8 @@ func TestSinglyLinkedListDeleteAtIndex(t *testing.T) {
 	if l != 2 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 2, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 1 && linkedlist.Head.Next.Data != 2 {
-		t.Errorf("linkedlist data did not matched. expected: 1 --> 2 , got: %s ", linkedlist)
+	if linkedlist.Head.Data != 1 && linkedlist.Head.Next.Data != 2 || linkedlist.Head.Prev != nil || linkedlist.Head.Next.Prev.Data != 1 {
+		t.Errorf("linkedlist data did not matched. expected: 1 <==> 2 , got: %s ", linkedlist)
 	}
 
 	linkedlist.DeleteAt(0)
@@ -246,13 +250,13 @@ func TestSinglyLinkedListDeleteAtIndex(t *testing.T) {
 	if l != 1 {
 		t.Fatalf("Length did not matched. linkedlist: %s\n expected: 1, got: %d ", linkedlist, l)
 	}
-	if linkedlist.Head.Data != 2 {
-		t.Errorf("linkedlist data did not matched. expected: 2, got: %d ", linkedlist.Head.Data)
+	if linkedlist.Head.Data != 2 || linkedlist.Head.Prev != nil {
+		t.Errorf("linkedlist data did not matched. expected: 2, got: %s ", linkedlist)
 	}
 }
 
-func TestSinglyLinkedListIndexOf(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListIndexOf(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtEnd(10)
 	linkedlist.InsertAtEnd(20)
 	linkedlist.InsertAtEnd(30)
@@ -273,8 +277,8 @@ func TestSinglyLinkedListIndexOf(t *testing.T) {
 	}
 }
 
-func TestSinglyLinkedListContains(t *testing.T) {
-	var linkedlist SinglyLinkedList
+func TestDoublyLinkedListContains(t *testing.T) {
+	var linkedlist DoublyLinkedList
 	linkedlist.InsertAtEnd(10)
 	linkedlist.InsertAtEnd(20)
 	linkedlist.InsertAtEnd(30)
