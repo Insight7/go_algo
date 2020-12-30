@@ -30,26 +30,32 @@ List of algorithms to implement
 
 ## Data structure Algorithms 
 
-### Tree
-
-### Queue
-
 ### Linked List
  - [X] singly Linked List
  - [X] Doubly Linked List
  - [ ] Circular Linked List
 
+### Stack
+ - [X] Array stack implementation
+ - [X] Max size stack implementation
+ - [ ] Linked list stack implenentation
+
+### Queue
+ - [X] Array queue implementation
+ - [X] Max size queue implementation
+ - [ ] Linked list queue implenentation
+
+### Tree
+
 ### Segment Tree
 
-### Stack
+### Priority Queue
+
+### Hashtable
 
 ### Tri
 
 ### Union Find
-
-### Hashtable
-
-### Priority Queue
 
 ## Dynamic Programming Algorithms 
 
