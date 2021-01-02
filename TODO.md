@@ -46,8 +46,14 @@ List of algorithms to implement
  - [ ] Linked list queue implenentation
 
 ### Tree
-
-### Segment Tree
+ - [X] Binary Tree
+ - [ ] Binary Search Tree
+ - [ ] Splay Tree
+ - [ ] Fenwick Tree
+ - [ ] AVL Tree
+ - [ ] Red Black Tree
+ - [ ] Segment Tree
+ - [ ] Generic Tree 
 
 ### Priority Queue
 
